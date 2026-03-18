@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Include this line for instant inline Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      const messages = [
+        {
+          type: 'MWA_BYOD_ESIM_INSTALL',
+          payload: {
+            scheme: 'LPA:test-install-url',
+          },
+        },
+        {
+          type: 'MWA_BYOD_REDIRECT_ON_DONE',
+          payload: {
+            route: 'overview',
+          },
+        },
+        {
+          type: 'MWA_BYOD_REDIRECT_PREPAID_PLANS',
+          payload: {
+            url: 'https://www.telus.com/sample-route',
+          },
+        },
+      ];
+      const sendDataToReactNative = dataNumber => {
+        const data = messages[dataNumber] ?? {};
+        if (window.ReactNativeWebView) {
+          window.ReactNativeWebView.postMessage(JSON.stringify(data));
+        } else {
+          console.warn(
+            'window.ReactNativeWebView not found. Are you in a WebView?',
+          );
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div
+      class="min-h-screen bg-gradient-to-br from-blue-50 to-slate-100 flex items-center justify-center p-6">
+      <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full">
+        <div class="flex items-center gap-3 mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+          <h1 class="text-2xl font-bold text-gray-800">WebView Messenger</h1>
+        </div>
+
+        <p class="text-gray-600 mb-8">
+          Click any button to send a message to React Native
+        </p>
+
+        <div class="space-y-4 gap-3">
+          <button
+            onclick="sendDataToReactNative(0)"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors shadow-md hover:shadow-lg">
+            Send Message 1
+          </button>
+          <button
+            onclick="sendDataToReactNative(1)"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors shadow-md hover:shadow-lg">
+            Send Message 2
+          </button>
+          <button
+            onclick="sendDataToReactNative(2)"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors shadow-md hover:shadow-lg">
+            Send Message 3
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
