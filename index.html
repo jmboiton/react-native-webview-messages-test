@@ -36,6 +36,18 @@
           );
         }
       };
+
+      const attachButtonHandlers = () => {
+        const buttons = document.querySelectorAll('[data-message-index]');
+        buttons.forEach(button => {
+          button.addEventListener('click', () => {
+            const messageIndex = Number(button.dataset.messageIndex);
+            sendDataToReactNative(messageIndex);
+          });
+        });
+      };
+
+      document.addEventListener('DOMContentLoaded', attachButtonHandlers);
     </script>
   </head>
   <body>
@@ -43,7 +55,19 @@
       class="min-h-screen bg-gradient-to-br from-blue-50 to-slate-100 flex items-center justify-center p-6">
       <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full">
         <div class="flex items-center gap-3 mb-6">
-          <Send class="w-8 h-8 text-blue-600" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            class="w-8 h-8 text-blue-600">
+            <path d="M22 2 11 13" />
+            <path d="m22 2-7 20-4-9-9-4Z" />
+          </svg>
           <h1 class="text-2xl font-bold text-gray-800">WebView Messenger</h1>
         </div>
 
@@ -53,19 +77,22 @@
 
         <div class="space-y-4 gap-3">
           <button
-            onclick="javascript: sendDataToReactNative(0)"
-            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors shadow-md hover:shadow-lg">
-            Send Message 1
+            data-message-index="0"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors shadow-md hover:shadow-lg text-left">
+            <span class="block text-base leading-tight">Install eSIM</span>
+            <span class="block mt-1 text-xs font-mono font-normal opacity-90 break-all leading-tight">MWA_BYOD_ESIM_INSTALL</span>
           </button>
           <button
-            onclick="javascript: sendDataToReactNative(1)"
-            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors shadow-md hover:shadow-lg">
-            Send Message 2
+            data-message-index="1"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors shadow-md hover:shadow-lg text-left">
+            <span class="block text-base leading-tight">Go to Overview</span>
+            <span class="block mt-1 text-xs font-mono font-normal opacity-90 break-all leading-tight">MWA_BYOD_REDIRECT_ON_DONE</span>
           </button>
           <button
-            onclick="javascript: sendDataToReactNative(2)"
-            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors shadow-md hover:shadow-lg">
-            Send Message 3
+            data-message-index="2"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors shadow-md hover:shadow-lg text-left">
+            <span class="block text-base leading-tight">View Prepaid Plans</span>
+            <span class="block mt-1 text-xs font-mono font-normal opacity-90 break-all leading-tight">MWA_BYOD_REDIRECT_PREPAID_PLANS</span>
           </button>
         </div>
       </div>
